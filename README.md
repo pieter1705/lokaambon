@@ -1,13 +1,27 @@
-# Responsive Dropdown Menu
-## [Watch it on youtube](https://youtu.be/rlFjsp4BtRA)
-### Dropdown Menu
+# LOKA MONITOR SFR AMBON
+Website Monitoring & Informasi Kantor Loka SFR Ambon
 
-- Responsive Dropdown Menu Using HTML CSS & JavaScript
-- Contains a responsive navigation bar.
-- Contains dropdown menu & a submenu.
-- Developed first with the Mobile First methodology, then for desktop.
-- Compatible with all mobile devices.
+Website internal untuk monitoring data, laporan, dan informasi operasional 
+kantor Loka Monitor Sumber Daya Laut dan Perikanan Ambon.
 
-💙 Join the channel to see more videos like this. [Bedimcode](https://www.youtube.com/@Bedimcode)
+## Tech Stack
+- **Backend**: PHP Native, MySQL
+- **Frontend**: HTML5, CSS3, Bootstrap 5, JavaScript 
+- **Server**: XAMPP/WAMP
 
-![preview img](/preview.png)
+## Fitur Utama
+- **Dashboard**: Monitoring data real-time
+- **Login Multi-user**: Admin, Staff, Pimpinan
+- **Laporan**: Input, edit, dan cetak laporan ke PDF/Excel
+- **Data Master**: Kelola data pegawai, kapal, monitoring SFR
+- **Riwayat**: Tracking aktivitas & riwayat laporan
+
+## Cara Install
+1. Clone repo: `git clone https://github.com/pieter1705/lokaambon`
+2. Import `database.sql` ke phpMyAdmin
+3. Edit `config.php` sesuai user MySQL lu
+4. Buka `localhost/lokaambon`
+
+## Catatan
+Project ini dibuat untuk internal kantor Loka Monitor SFR Ambon. 
+Data sensitif sudah dihapus untuk keperluan portfolio.
