@@ -378,7 +378,7 @@
         
         Chart.register(ChartDataLabels);
 
-        const csvUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vT0xSLtow-2-KxtJ20MBw3srgyODiMwIFDPgaCSPW6Cz84-Zk-3bJs9Xhqij0pGdeRA_31YNrorxRYJ/pub?output=csv';
+        const csvUrl = 'Link DB Rahasia';
         let cityChart, serviceChart;
 
         async function initDashboard() {
