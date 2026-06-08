@@ -1,0 +1,819 @@
+:root {
+  --header-height: 3.5rem;
+
+  /*========== Colors ==========*/
+  /* Color mode HSL(hue, saturation, lightness); */
+  --black-color: hsl(220, 24%, 12%); 
+  --black-color-light: hsl(220, 24%, 15%); 
+  --black-color-lighten: hsl(220, 20%, 18%);
+  --white-color: #fff;
+  --body-color: hsl(220, 100%, 97%);
+  --blue-gradient: linear-gradient(90deg, #004e92, #000428);
+  --blue-color-light: #0056b3;
+
+  /*========== Font and typography ==========*/
+  --body-font: "Montserrat", sans-serif;
+  --normal-font-size: .938rem;
+
+  /*========== Font weight ==========*/
+  --font-regular: 400;
+  --font-semi-bold: 600;
+
+  /*========== z index ==========*/
+  --z-tooltip: 10;
+  --z-fixed: 100;
+}
+
+/*========== Responsive typography ==========*/
+@media screen and (min-width: 1024px) {
+  :root {
+    --normal-font-size: 1rem;
+  }
+}
+
+/*=============== BASE ===============*/
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  font-family: var(--body-font);
+  font-size: var(--normal-font-size);
+  background-color: var(--body-color);
+  padding-top: var(--header-height);
+}
+
+ul {
+  list-style: none;
+  
+}
+
+a {
+  text-decoration: none;
+}
+
+/*=============== REUSABLE CSS CLASSES ===============*/
+.container {
+  max-width: 1120px;
+  margin-inline: 1.5rem;
+}
+
+/*=============== HEADER ===============*/
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  /* Ganti background-color ke background gradasi */
+  background: var(--blue-gradient); 
+  box-shadow: 0 2px 16px rgba(0, 0, 0, .3);
+  z-index: var(--z-fixed);
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    overflow-x: hidden; /* mengunci geser ke kiri/kanan */
+}
+
+/*=============== NAV ===============*/
+.nav {
+  height: var(--header-height);
+}
+
+.nav__logo, 
+.nav__burger, 
+.nav__close {
+  color: var(--white-color);
+}
+
+.nav__data {
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav__logo {
+  display: inline-flex;
+  align-items: center;
+  column-gap: .25rem;
+  font-weight: var(--font-semi-bold);
+  
+}
+
+.nav__logo i {
+  font-weight: initial;
+  font-size: 1.25rem;
+}
+
+.nav__toggle {
+  position: relative;
+  width: 32px;
+  height: 32px;
+}
+
+.nav__burger, 
+.nav__close {
+  position: absolute;
+  width: max-content;
+  height: max-content;
+  inset: 0;
+  margin: auto;
+  font-size: 1.25rem;
+  cursor: pointer;
+  transition: opacity .1s, transform .4s;
+}
+
+.nav__close {
+  opacity: 0;
+}
+
+/* Navigation  mobile devices */
+@media screen and (max-width: 1118px) {
+  .nav__list {
+    background: var(--blue-gradient); /* Warna mobile menu */
+    padding-top: 1rem;
+  }
+  .nav__menu {
+    position: absolute;
+    left: 0;
+    top: 2.5rem;
+    width: 100%;
+    height: calc(100vh - 3.5rem);
+    overflow: auto;
+    pointer-events: none;
+    opacity: 0;
+    transition: top .4s, opacity .3s;
+  }
+  .nav__menu::-webkit-scrollbar {
+    width: 0;
+  }
+  .nav__list {
+    background-color: var(--black-color);
+    padding-top: 1rem;
+  }
+}
+
+.nav__link {
+  color: var(--white-color);
+  /* Hilangkan background-color solid agar mengikuti gradasi header */
+  background-color: transparent; 
+  font-weight: var(--font-semi-bold);
+  padding: 1.25rem 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: background-color .3s;
+}
+
+.nav__link:hover {
+  /* Efek hover biru yang lebih terang */
+  background-color: rgba(255, 255, 255, 0.1); 
+}
+
+/* Show menu */
+.show-menu {
+  opacity: 1;
+  top: 3.5rem;
+  pointer-events: initial;
+}
+
+/* Show icon */
+.show-icon .nav__burger {
+  opacity: 0;
+  transform: rotate(90deg);
+}
+.show-icon .nav__close {
+  opacity: 1;
+  transform: rotate(90deg);
+}
+
+/*=============== DROPDOWN ===============*/
+.dropdown__item {
+  cursor: pointer;
+}
+
+.dropdown__arrow {
+  font-size: 1.25rem;
+  font-weight: initial;
+  transition: transform .1s;
+}
+
+.dropdown__link, 
+.dropdown__sublink {
+  padding: 1rem 1rem 1rem 2rem;
+  color: var(--white-color);
+  background-color: #003366; 
+  display: flex;
+  align-items: center;
+  column-gap: .1rem;
+  font-weight: var(--font-semi-bold);
+  transition: background-color .1s;
+}
+
+.dropdown__link i, 
+.dropdown__sublink i {
+  font-size: 1rem;
+  font-weight: initial;
+}
+
+.dropdown__link:hover, 
+.dropdown__sublink:hover {
+  background-color: #004080; /* Hover dropdown */
+}
+
+.dropdown__menu, 
+.dropdown__submenu {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height .1s ease-out;
+}
+
+/* Pengaturan dasar Dropdown */
+.dropdown__menu, 
+.dropdown__submenu,
+.dropdown__sub-submenu {
+    position: absolute;
+    background-color: #003366; 
+    opacity: 0;
+    visibility: hidden;
+    transition: .3s;
+    z-index: var(--z-fixed);
+    min-width: 200px;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+}
+
+/* Dropdown Utama (Profil / Mapping) */
+.dropdown__item:hover > .dropdown__menu {
+    opacity: 1;
+    visibility: visible;
+    top: 100%; 
+}
+
+/* Sub-Menu Tingkat 2 (Kota Ambon, dll) */
+.dropdown__subitem {
+    position: relative;
+}
+
+.dropdown__subitem:hover > .dropdown__submenu {
+    opacity: 1;
+    visibility: visible;
+    left: 100%; /* Default ke kanan */
+    top: 0;
+}
+
+
+.nav__menu .nav__list li:last-child .dropdown__submenu,
+.nav__menu .nav__list li:last-child .dropdown__sub-submenu {
+    left: auto;
+    right: 100%; 
+}
+
+/* Show dropdown menu & submenu */
+.dropdown__item:hover .dropdown__menu, 
+.dropdown__subitem:hover > .dropdown__submenu {
+  max-height: 300px;
+  transition: max-height .1s ease-in;
+}
+
+/* Rotate dropdown icon */
+.dropdown__item:hover .dropdown__arrow {
+  transform: rotate(180deg);
+}
+
+/*=============== DROPDOWN SUBMENU ===============*/
+.dropdown__add {
+  margin-left: auto;
+}
+
+.dropdown__sublink {
+  background-color: var(--black-color-lighten);
+}
+
+/* Hero Section */
+  .hero {
+    height: 60vh; 
+    min-height: 400px;
+    position: relative;
+    overflow: hidden;
+
+   
+    background-size: cover;     
+    background-position: center; 
+    background-attachment: fixed; 
+    background-repeat: no-repeat;
+  }
+  
+  .hero:after {
+    content: "";
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 30%;
+    bottom: 0;
+    
+  }
+  
+  .hero .content {
+    padding: 1.4rem 7%;
+    max-width: 60rem;
+  }
+  
+  .hero .content h1 {
+    font-size: 5rem;
+    color: #fff;
+    text-shadow: 1px 1px 3px rgb(17, 17, 17);
+    line-height: 1.2;
+  }
+  
+  .hero .content h1 span {
+    color: var(--primary);
+  }
+  
+  .hero .content p {
+    font-size: 1.6rem;
+    margin-top: 1rem;
+    line-height: 1.4;
+    font-weight: 100;
+    text-shadow: 1px 1px 3px rgb(2, 2, 2);
+    text-align: center;
+  }
+  
+  .hero .content .cta {
+    margin-top: 1rem;
+    display: inline-block;
+    padding: 1rem 3rem;
+    font-size: 1.4rem;
+    color: #fff;
+    background-color: var(--primary);
+   
+  }
+
+  .hero__slider {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1; 
+}
+
+.hero__slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    opacity: 0; 
+    transition: opacity 1s ease-in-out; 
+}
+
+.hero__slide.active {
+    opacity: 5; 
+}
+
+/* Memastikan konten teks berada di atas slider */
+.hero .content {
+    z-index: 1;
+    text-align: center;
+    color: white;
+}
+  /* --- Bagian Visi Misi Reveal --- */
+.reveal-left {
+    opacity: 0;
+    transform: translateX(-100px);
+    transition: all 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Lebih smooth */
+}
+
+
+.reveal-left.active {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.hero-section { 
+    width: 100%;
+    min-height: 100vh; 
+    background-size: cover; 
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Animasi Dasar Slide Right */
+    .reveal-right {
+        opacity: 0;
+        transform: translateX(100px); /* Mulai dari kanan */
+        transition: all 0.8s ease-out;
+    }
+
+    /* Ketika elemen aktif saat di-scroll */
+    .reveal-right.active {
+        opacity: 1;
+        transform: translateX(0); /* Kembali ke posisi asli */
+    }
+
+
+    /* Tata Letak Masonry Grid untuk Sorotan Foto */
+    .gallery-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        grid-auto-rows: 200px;
+        gap: 15px;
+    }
+
+    /* Membuat satu foto menjadi besar (Featured) */
+    .gallery-item.featured {
+        grid-column: span 2;
+        grid-row: span 2;
+    }
+
+    @media (max-width: 768px) {
+        .gallery-item.featured {
+            grid-column: span 1;
+            grid-row: span 1;
+        }
+    }
+
+    /* Efek Hover Album */
+    .album-card {
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    
+    .album-card:hover {
+        transform: translateY(-10px);
+    }
+
+    /* Overlay Keterangan Foto */
+    .photo-overlay {
+        background: linear-gradient(to top, rgba(0, 43, 73, 0.9) 0%, transparent 100%);
+        transition: opacity 0.3s ease;
+    }
+
+
+
+
+/* ================= RESPONSIVE ================= */
+@media screen and (max-width: 768px) {
+  .about__row {
+    flex-direction: column;
+  }
+
+  .about h2 {
+    font-size: 1.6rem;
+  }
+}
+
+
+
+/*=============== BREAKPOINTS ===============*/
+
+/*========== MOBILE NAV OPTIMIZATION ==========*/
+@media screen and (max-width: 1118px) {
+    .nav__menu {
+        position: fixed; 
+        top: -100%; 
+        left: 0;
+        width: 100%;
+        height: auto; 
+        max-height: 100vh; 
+        background: var(--blue-gradient); 
+        padding: 4rem 1.5rem 2rem; 
+        text-align: center;
+        transition: top .4s; 
+        overflow-y: auto; 
+        z-index: var(--z-fixed);
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Ketika menu ditampilkan */
+    .show-menu {
+        top: 0; 
+    }
+
+    /* Memperbaiki posisi ikon Burger & Close */
+    .nav__toggle {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem; 
+        color: var(--white-color);
+        cursor: pointer;
+        z-index: calc(var(--z-fixed) + 1); 
+    }
+
+    
+    .nav__list {
+        display: flex;
+        flex-direction: column;
+        row-gap: 1.5rem;
+    }
+
+    .nav__link {
+        padding: 1rem;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1); 
+        justify-content: center; 
+    }
+}
+
+/* For large devices */
+@media screen and (min-width: 1118px) {
+  .hero, .about {
+    height: calc(100vh - (var(--header-height) + 2rem));
+    min-height: calc(100vh - (var(--header-height) + 2rem));
+  }  
+  body {
+    padding-top: calc(var(--header-height) + 2rem);
+  }
+  .container {
+    margin-inline: auto;
+  }
+
+  .nav {
+    height: calc(var(--header-height) + 2rem);
+    display: flex;
+    justify-content: space-between;
+  }
+  .nav__toggle {
+    display: none;
+  }
+  .nav__list {
+    height: 100%;
+    display: flex;
+    column-gap: 3rem;
+  }
+  .nav__link {
+    height: 100%;
+    padding: 0;
+    justify-content: initial;
+    column-gap: .25rem;
+  }
+  .nav__link:hover {
+    background-color: transparent;
+  }
+
+  .dropdown__item, 
+  .dropdown__subitem {
+    position: relative;
+  }
+
+  .dropdown__menu, 
+  .dropdown__submenu {
+    max-height: initial;
+    overflow: initial;
+    position: absolute;
+    left: 0;
+    top: 6rem;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .3s, top .3s;
+  }
+
+  .dropdown__link, 
+  .dropdown__sublink {
+    padding-inline: 1rem 3.5rem;
+  }
+
+  .dropdown__subitem .dropdown__link {
+    padding-inline: 1rem;
+  }
+
+  .dropdown__submenu {
+    position: absolute;
+    left: 100%;
+    top: .5rem;
+  }
+
+  /* Show dropdown menu */
+  .dropdown__item:hover .dropdown__menu {
+    opacity: 1;
+    top: 5.5rem;
+    pointer-events: initial;
+    transition: top .3s;
+  }
+
+  /* Show dropdown submenu */
+  .dropdown__subitem:hover > .dropdown__submenu {
+    opacity: 1;
+    top: 0;
+    pointer-events: initial;
+    transition: top .3s;
+  }
+}
+
+
+/* Posisi Sub-Menu (Tingkat 3) */
+.dropdown__subitem {
+    position: relative;
+}
+
+
+.dropdown__sub-submenu {
+    position: absolute;
+    left: 100%; 
+    top: 0;
+    opacity: 0;
+    visibility: hidden;
+    transition: .3s;
+    z-index: 100;
+}
+
+
+.nav__list li:nth-last-child(2) .dropdown__submenu,
+.nav__list li:nth-last-child(2) .dropdown__sub-submenu {
+    left: auto;
+    right: 100%; 
+}
+
+
+.dropdown__item:nth-last-of-type(2) .dropdown__sub-submenu {
+    left: auto;
+    right: 100%;
+}
+
+
+.dropdown__item:nth-last-of-type(2) .subdropdown__arrow {
+    transform: rotate(180deg); 
+}
+
+.dropdown__subitem:hover > .dropdown__submenu {
+    opacity: 1;
+    visibility: visible;
+}
+
+.dropdown__sublink {
+    padding: 0.75rem 1.25rem;
+    display: block;
+    color: #333;
+    font-size: 0.9rem;
+    white-space: nowrap;
+}
+
+.dropdown__sublink:hover {
+    background-color: #f0f0f0;
+}
+
+.subdropdown__arrow {
+    margin-left: auto;
+    font-size: 1.2rem;
+}
+
+
+/* Tampilan Mobile (Responsif) */
+@media screen and (max-width: 1118px) {
+    .dropdown__menu, 
+    .dropdown__submenu,
+    .dropdown__sub-submenu {
+        position: relative;
+        left: 0 !important;
+        right: auto !important;
+        max-height: 0;
+        overflow: hidden;
+        opacity: 1;
+        visibility: visible;
+        box-shadow: none;
+    }
+
+    .dropdown__item:hover > .dropdown__menu,
+    .dropdown__subitem:hover > .dropdown__submenu,
+    .dropdown__sub-subitem:hover > .dropdown__sub-submenu {
+        max-height: 1000px; /* Expand saat di klik/hover */
+    }
+}
+
+/* Styling untuk Sub-Sub Menu */
+.dropdown__subitem { position: relative; }
+
+/* posisi sub-menu tingkat 3 */
+    .dropdown__sub-subitem {
+        position: relative;
+    }
+
+    .dropdown__sub-submenu {
+        position: absolute;
+        left: 100%; /* Muncul di samping kanan */
+        top: 0;
+        background-color: #fff;
+        box-shadow: 0 4px 12px rgba(24, 23, 23, 0.845);
+        min-width: 180px;
+        padding: 0.5rem 0;
+        list-style: none;
+        opacity: 0;
+        visibility: hidden;
+        transition: .3s;
+        z-index: 100;
+    }
+
+    .dropdown__sub-subitem:hover > .dropdown__sub-submenu {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    /*  link sub-sub menu */
+    .dropdown__sub-sublink {
+        padding: 0.75rem 1.25rem;
+        display: block;
+        color: #333;
+        font-size: 0.85rem;
+        text-decoration: none;
+    }
+
+    .dropdown__sub-sublink:hover {
+        background-color: #f0f0f0;
+    }
+
+    /* Panah indikator untuk menu yang punya sub-menu */
+    .subdropdown__arrow {
+        float: right;
+        margin-top: 4px;
+    }
+
+
+/*=============== MAP STYLING ===============*/
+#map-section {
+    display: none; /* Sembunyi sebelum diklik */
+    padding: 2rem 0 5rem;
+    background-color: var(--body-color);
+}
+
+#map-section h2 {
+    text-align: center;
+    margin-bottom: 2rem;
+    color: var(--black-color);
+    font-size: 2rem;
+}
+
+#map {
+    height: 500px;
+    width: 100%;
+    border-radius: 1rem;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    z-index: 1; 
+}
+
+#map-section .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+@media screen and (max-width: 768px) {
+    #map {
+        height: 350px;
+    }
+}
+
+.tower-icon-container {
+    background: transparent !important;
+    border: none !important;
+}
+
+.leaflet-popup-content-wrapper {
+    border-radius: 8px;
+    padding: 5px;
+    box-shadow: 0 3px 14px rgba(0,0,0,0.4);
+}
+
+.leaflet-popup-content {
+    margin: 13px 15px;
+    line-height: 1.4;
+}
+
+/* Menghilangkan background putih pada container icon tower */
+.tower-icon-container {
+    background: transparent !important;
+    border: none !important;
+}
+
+/* Mengatur bayangan dan radius popup */
+.leaflet-popup-content-wrapper {
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    padding: 5px;
+}
+
+.leaflet-popup-tip {
+    background: white;
+}
+
+/* Mengatur tampilan section peta */
+#map-section {
+    display: none;
+    padding: 2rem 0;
+    background-color: #0d0d0d; 
+}
+
+#map {
+    height: 600px;
+    width: 100%;
+    border-radius: 12px;
+    border: 2px solid #444;
+}
