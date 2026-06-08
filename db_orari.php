@@ -387,7 +387,7 @@
             return gradient;
         }
 
-        const csvUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vT52cgUmE1A7unqqGw7awGDvieIOEEWSVgnz7Mw-oIqMBpEOqkvc_SLlUjpT61JiIqZSmbQYU26dNpy/pub?output=csv';
+        const csvUrl = 'Link DB Rahasia';
         let masterData = [];
         let charts = {};
 
