@@ -384,7 +384,7 @@
         return gradient;
     }
 
-    const csvUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vScjK_rwE9O1LS1BLs_iBwu6ouzODBMVaDIyuX1Cvhv5oJYATiyrqfhUxA0HRadrgKd28fH6U1HwkQx/pub?output=csv';
+    const csvUrl = 'Link DB Spreadsheet ( rahasia )';
     
     let masterData = [];
     let charts = {};
